@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"> <!--estou indicando que, quando eu usar o parâmetro "th" eu estarei me referindo ao thymeleaf-->
+<head>
+    <title>MyCodeBlog</title>
+    <!--CSS (Bootstrap)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand" style="font-weight: bold">MyCodeBlog</span>
+        </nav>
+    </header>
+
+    <section>
+        <div class="container" style="width: 60%; padding-bottom: 30px">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Posts</li>
+                </ol>
+            </nav>
+
+            <div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="post: ${posts}"> <!--${posts} é o nome do atributo dado lá no CodeBlogController (em AttributeName); nesse caso, o "each" vai ser responsável por criar um card para cada post que tiver no banco de dados-->
+                <div class="card-body">
+                    <p class="card-subtitle mb-2 text muted" style="font-size: 0.8rem">
+                        <span th:text="${post.autor}"/>
+                        <span th:text="${post.data}"/>
+                    </p>
+
+                    <a href="#">
+                        <h4 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;">
+                            <span th:text="${post.titulo}"/>
+                        </h4>
+                    </a>
+
+                    <p class="card-text">
+                        <span th:utext="${#strings.abbreviate(post.texto,400)}"/> <!--mostra só os primeiros 400 caracteres do post-->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
